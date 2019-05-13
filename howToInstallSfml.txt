@@ -1,0 +1,4 @@
+https://www.youtube.com/watch?v=w339OWGlSo0
+
+sfml-graphics-d.lib;sfml-window-d.lib;sfml-system-d.lib;sfml-audio-d.lib;
+sfml-graphics.lib;sfml-window.lib;sfml-system.lib;sfml-audio.lib;
