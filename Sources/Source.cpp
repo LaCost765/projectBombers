@@ -20,10 +20,17 @@ int main()
 	newGameButton.sprite.setPosition(700, 250);
 	continueButton.sprite.setPosition(700, 450);
 	quitButton.sprite.setPosition(700, 650);
+	newGameActiveButton.sprite.setPosition(700, 250);
+	continueActiveButton.sprite.setPosition(700, 450);
+	quitActiveButton.sprite.setPosition(700, 650);
 
 	RenderWindow window(VideoMode(1200, 800), "Bomberman");
 	while (window.isOpen())
 	{
+		//Для хранения координат мыши
+		Vector2i pixelPos = Mouse::getPosition(window);
+		Vector2f pos = window.mapPixelToCoords(pixelPos);
+
 		Event event;
 
 		while (window.pollEvent(event))
@@ -36,9 +43,12 @@ int main()
 		if (!inGame) //отрисовка начального меню, если пользователь еще не начал игру
 		{
 			window.draw(bomberMan.sprite);
-			window.draw(newGameButton.sprite);
-			window.draw(continueButton.sprite);
-			window.draw(quitButton.sprite);
+			if (newGameButton.sprite.getGlobalBounds().contains(pos.x, pos.y)) window.draw(newGameActiveButton.sprite);
+			else window.draw(newGameButton.sprite);
+			if (continueButton.sprite.getGlobalBounds().contains(pos.x, pos.y)) window.draw(continueActiveButton.sprite);
+			else window.draw(continueButton.sprite);
+			if (quitButton.sprite.getGlobalBounds().contains(pos.x, pos.y)) window.draw(quitActiveButton.sprite);
+			else window.draw(quitButton.sprite);
 			window.draw(titleBomberMan.sprite);
 		}
 		window.display();
