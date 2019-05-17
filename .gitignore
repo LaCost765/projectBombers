@@ -2,7 +2,7 @@ x64/
 Release/
 Debug/
 .vs/
-game.sln
-game.vcxproj.filters
-game.vcxproj
-game.vcxproj.user
+*.sln
+*.filters
+*.vcxproj
+*.user
