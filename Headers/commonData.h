@@ -21,11 +21,11 @@ public:
 	}
 };
 
-Picture bomberMan("bomberman.png", 0, 0, 573, 780);
-Picture titleBomberMan("titleBomberman.png", 0, 0, 600, 150);
-Picture newGameButton("newGameButton.png", 0, 0, 400, 100);
-Picture newGameActiveButton("newGameActiveButton.png", 0, 0, 400, 100);
-Picture continueButton("continueButton.png", 0, 0, 400, 100);
-Picture continueActiveButton("continueActiveButton.png", 0, 0, 400, 100);
-Picture quitButton("quitButton.png", 0, 0, 400, 100);
-Picture quitActiveButton("quitActiveButton.png", 0, 0, 400, 100);
+Picture bomberMan("Data/bomberman.png", 0, 0, 573, 780);
+Picture titleBomberMan("Data/titleBomberman.png", 0, 0, 600, 150);
+Picture newGameButton("Data/newGameButton.png", 0, 0, 400, 100);
+Picture newGameActiveButton("Data/newGameActiveButton.png", 0, 0, 400, 100);
+Picture continueButton("Data/continueButton.png", 0, 0, 400, 100);
+Picture continueActiveButton("Data/continueActiveButton.png", 0, 0, 400, 100);
+Picture quitButton("Data/quitButton.png", 0, 0, 400, 100);
+Picture quitActiveButton("Data/quitActiveButton.png", 0, 0, 400, 100);
