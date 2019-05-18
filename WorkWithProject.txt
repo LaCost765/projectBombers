@@ -1,0 +1,23 @@
+1. Работа с проектом:
+    - создайте рабочую ветку.
+    - добавьте к своему локальному репозиторию основной: git remote add {main_repo_name} https://github.com/LaCost765/projectBombers.git
+    - выполните git checkout {work_branch_name}
+    - выполните git pull {main_repo_name} develop. вы получите последнюю принятую версию проекта
+    - в vs наначальной вкладке, в правом нижнем углу, кнопка продолжить без кода. Далее, файл->создать->проект_из_существующего_кода. Выберите свой репозиторий
+    - подключите SFML
+    - подключите файлы HEADERS (проект->свойства(Конфигурация: Все конфигурации, Платформа: Все платформы),
+     вкладка C/C++ -> Общие -> Доп._каталоги_включаемых_файлов, укажите путь к папке HEADERS )
+
+2. Тестирование pull request`ов:
+    - создайте тестовую ветку.
+    - добавьте к своему локальному репозиторию основной: git remote add {main_repo_name} https://github.com/LaCost765/projectBombers.git
+    - выполните git checkout {test_branch_name}
+    - выполните git pull {main_repo_name} {pull_request_name || SHA-1}. вы получите все изменения pull request`а
+
+3. Обновление форка:
+    - добавьте к своему локальному репозиторию основной: git remote add {main_repo_name} https://github.com/LaCost765/projectBombers.git
+    - выполните git checkout master
+    - выполните git pull {main_repo_name} master
+
+!!!ATTENTION!!!
+Всегда обновляйте свои форки после одобрения pull request`а!!!
