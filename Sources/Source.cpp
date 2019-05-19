@@ -15,6 +15,7 @@ int main()
 	bool inGame = false;
 
 	//выбор положния для элементов стартового меню
+	background.sprite.setPosition(0, 0);
 	bomberMan.sprite.setPosition(0, 0);
 	titleBomberMan.sprite.setPosition(600, 50);
 	newGameButton.sprite.setPosition(700, 250);
@@ -42,6 +43,7 @@ int main()
 		window.clear();
 		if (!inGame) //отрисовка начального меню, если пользователь еще не начал игру
 		{
+			window.draw(background.sprite);
 			window.draw(bomberMan.sprite);
 			if (newGameButton.sprite.getGlobalBounds().contains(pos.x, pos.y)) window.draw(newGameActiveButton.sprite);
 			else window.draw(newGameButton.sprite);

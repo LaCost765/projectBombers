@@ -29,3 +29,4 @@ Picture continueButton("Data/continueButton.png", 0, 0, 400, 100);
 Picture continueActiveButton("Data/continueActiveButton.png", 0, 0, 400, 100);
 Picture quitButton("Data/quitButton.png", 0, 0, 400, 100);
 Picture quitActiveButton("Data/quitActiveButton.png", 0, 0, 400, 100);
+Picture background("Data/background.jpg", 0, 0, 1600, 800);
