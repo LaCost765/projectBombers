@@ -1,4 +1,5 @@
 #include <iostream>
+#include <fstream>
 #include <sstream>
 #include <SFML/Graphics.hpp>
 using namespace sf;
@@ -11,10 +12,13 @@ using namespace sf;
 
 int main()
 {
-	
-	bool inGame = false;
-
 	//выбор положни€ дл€ элементов стартового меню
+	yesButton.sprite.setPosition(300, 400);
+	noButton.sprite.setPosition(700, 400);
+	yesActiveButton.sprite.setPosition(300, 400);
+	noActiveButton.sprite.setPosition(700, 400);
+	note1.sprite.setPosition(300, 50);
+	note2.sprite.setPosition(200, 150);
 	background.sprite.setPosition(0, 0);
 	bomberMan.sprite.setPosition(0, 0);
 	titleBomberMan.sprite.setPosition(600, 50);
@@ -38,6 +42,41 @@ int main()
 		{
 			if (event.type == Event::Closed)
 				window.close();
+
+			if (event.type == Event::MouseButtonPressed)
+				if (event.key.code == Mouse::Left)
+				{
+					if (!inGame)
+					{
+						if (quitButton.sprite.getGlobalBounds().contains(pos.x, pos.y)) window.close();
+						if (newGameButton.sprite.getGlobalBounds().contains(pos.x, pos.y)) { newGameMenu = true; inGame = true; }
+						if (continueButton.sprite.getGlobalBounds().contains(pos.x, pos.y)) 
+						{ 
+							levelInProcess = true;
+							std::ifstream fin("Data/level.txt");
+							fin >> level;
+							inGame = true; 
+						}
+					}
+					else
+					{
+						if (newGameMenu)
+						{
+							if (yesButton.sprite.getGlobalBounds().contains(pos.x, pos.y))
+							{
+								newGameMenu = false;
+								levelInProcess = true;
+								level = 1;
+							}
+
+							if (noButton.sprite.getGlobalBounds().contains(pos.x, pos.y))
+							{
+								newGameMenu = false;
+								inGame = false;
+							}
+						}
+					}
+				}
 		}
 
 		window.clear();
@@ -52,6 +91,23 @@ int main()
 			if (quitButton.sprite.getGlobalBounds().contains(pos.x, pos.y)) window.draw(quitActiveButton.sprite);
 			else window.draw(quitButton.sprite);
 			window.draw(titleBomberMan.sprite);
+		}
+		else
+		{
+			if (newGameMenu)
+			{
+				window.draw(note1.sprite);
+				window.draw(note2.sprite);
+				if (yesButton.sprite.getGlobalBounds().contains(pos.x, pos.y)) window.draw(yesActiveButton.sprite);
+				else window.draw(yesButton.sprite);
+				if (noButton.sprite.getGlobalBounds().contains(pos.x, pos.y)) window.draw(noActiveButton.sprite);
+				else window.draw(noButton.sprite);
+			}
+			
+			if (levelInProcess)
+			{
+				// there will be action
+			}
 		}
 		window.display();
 	}

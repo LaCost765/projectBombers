@@ -30,3 +30,11 @@ Picture continueActiveButton("Data/continueActiveButton.png", 0, 0, 400, 100);
 Picture quitButton("Data/quitButton.png", 0, 0, 400, 100);
 Picture quitActiveButton("Data/quitActiveButton.png", 0, 0, 400, 100);
 Picture background("Data/background.jpg", 0, 0, 1600, 800);
+Picture note1("Data/note1.png", 0, 0, 600, 150);
+Picture note2("Data/note2.png", 0, 0, 800, 150);
+Picture yesButton("Data/yesButton.png", 0, 0, 200, 200);
+Picture noButton("Data/noButton.png", 0, 0, 200, 200);
+Picture yesActiveButton("Data/yesActiveButton.png", 0, 0, 200, 200);
+Picture noActiveButton("Data/noActiveButton.png", 0, 0, 200, 200);
+bool inGame = false;
+
