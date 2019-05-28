@@ -13,28 +13,12 @@ using namespace sf;
 
 
 int main()
-{
-	// select position for start menu items
-	yesButton.sprite.setPosition(300, 400);
-	noButton.sprite.setPosition(700, 400);
-	yesActiveButton.sprite.setPosition(300, 400);
-	noActiveButton.sprite.setPosition(700, 400);
-	note1.sprite.setPosition(300, 50);
-	note2.sprite.setPosition(200, 150);
-	background.sprite.setPosition(0, 0);
-	bomberMan.sprite.setPosition(0, 0);
-	titleBomberMan.sprite.setPosition(600, 50);
-	newGameButton.sprite.setPosition(700, 250);
-	continueButton.sprite.setPosition(700, 450);
-	quitButton.sprite.setPosition(700, 650);
-	newGameActiveButton.sprite.setPosition(700, 250);
-	continueActiveButton.sprite.setPosition(700, 450);
-	quitActiveButton.sprite.setPosition(700, 650);
+{  
 
+	setParametrs();
 	RenderWindow window(VideoMode(1200, 800), "Bomberman");
 	
-	// To add a character
-	Player hero("Data/heroBomb.png", 250, 250, 50.0, 50.0);// create hero object of class player
+
 
 	float CurrentFrame = 0;// stores the current frame
 	Clock clock;

@@ -1,6 +1,5 @@
 #pragma once
 //—юда пишем прототипы функций
-
 class Player {
 public:
 	float x, y, w, h, dx, dy, speed = 0; //player coordinates x and y, height width, acceleration (in x and y), speed
@@ -39,3 +38,7 @@ public:
 		sprite.setPosition(x, y);
 	}
 };
+
+
+// To add a character
+Player hero("Data/heroBomb.png", 250, 250, 50.0, 50.0);// create hero object of class player

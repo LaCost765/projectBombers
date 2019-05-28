@@ -38,3 +38,21 @@ Picture yesActiveButton("Data/yesActiveButton.png", 0, 0, 200, 200);
 Picture noActiveButton("Data/noActiveButton.png", 0, 0, 200, 200);
 bool inGame = false;
 
+void setParametrs() {
+	// select position for start menu items
+	yesButton.sprite.setPosition(300, 400);
+	noButton.sprite.setPosition(700, 400);
+	yesActiveButton.sprite.setPosition(300, 400);
+	noActiveButton.sprite.setPosition(700, 400);
+	note1.sprite.setPosition(300, 50);
+	note2.sprite.setPosition(200, 150);
+	background.sprite.setPosition(0, 0);
+	bomberMan.sprite.setPosition(0, 0);
+	titleBomberMan.sprite.setPosition(600, 50);
+	newGameButton.sprite.setPosition(700, 250);
+	continueButton.sprite.setPosition(700, 450);
+	quitButton.sprite.setPosition(700, 650);
+	newGameActiveButton.sprite.setPosition(700, 250);
+	continueActiveButton.sprite.setPosition(700, 450);
+	quitActiveButton.sprite.setPosition(700, 650);
+}
