@@ -10,29 +10,22 @@ using namespace sf;
 #include "Leha.h"
 #include "Misha.h"
 
-int main()
-{
-	//выбор положния для элементов стартового меню
-	yesButton.sprite.setPosition(300, 400);
-	noButton.sprite.setPosition(700, 400);
-	yesActiveButton.sprite.setPosition(300, 400);
-	noActiveButton.sprite.setPosition(700, 400);
-	note1.sprite.setPosition(300, 50);
-	note2.sprite.setPosition(200, 150);
-	background.sprite.setPosition(0, 0);
-	bomberMan.sprite.setPosition(0, 0);
-	titleBomberMan.sprite.setPosition(600, 50);
-	newGameButton.sprite.setPosition(700, 250);
-	continueButton.sprite.setPosition(700, 450);
-	quitButton.sprite.setPosition(700, 650);
-	newGameActiveButton.sprite.setPosition(700, 250);
-	continueActiveButton.sprite.setPosition(700, 450);
-	quitActiveButton.sprite.setPosition(700, 650);
 
+
+int main()
+{  
+
+	setParametrs();
 	RenderWindow window(VideoMode(1200, 800), "Bomberman");
+	
+
+
+	float CurrentFrame = 0;// stores the current frame
+	Clock clock;
+
 	while (window.isOpen())
 	{
-		//Для хранения координат мыши
+		// To store the mouse coordinates
 		Vector2i pixelPos = Mouse::getPosition(window);
 		Vector2f pos = window.mapPixelToCoords(pixelPos);
 
@@ -80,7 +73,7 @@ int main()
 		}
 
 		window.clear();
-		if (!inGame) //отрисовка начального меню, если пользователь еще не начал игру
+		if (!inGame) // draw the initial menu if the user has not started the game yet
 		{
 			window.draw(background.sprite);
 			window.draw(bomberMan.sprite);
@@ -105,11 +98,55 @@ int main()
 			}
 			
 			if (levelInProcess)
-			{
+			{    
 				// there will be action
+				window.clear();
+
+				
+				float time = clock.getElapsedTime().asMicroseconds();
+				clock.restart();
+				time = time / 800;
+				// character with animation
+				if ((Keyboard::isKeyPressed(Keyboard::Left) || (Keyboard::isKeyPressed(Keyboard::A)))) {
+					hero.dir = 1; hero.speed = 0.1;
+					CurrentFrame += 0.005*time;
+					if (CurrentFrame > 5) CurrentFrame -= 5;
+					hero.sprite.setTextureRect(IntRect(50 * int(CurrentFrame), 50, 50, 50));
+				}
+
+				if ((Keyboard::isKeyPressed(Keyboard::Right) || (Keyboard::isKeyPressed(Keyboard::D)))) {
+					hero.dir = 0; hero.speed = 0.1;
+					CurrentFrame += 0.005*time;
+					if (CurrentFrame > 5) CurrentFrame -= 5;
+					hero.sprite.setTextureRect(IntRect(50 * int(CurrentFrame), 0, 50, 50));
+				}
+
+				if ((Keyboard::isKeyPressed(Keyboard::Up) || (Keyboard::isKeyPressed(Keyboard::W)))) {
+					hero.dir = 3; hero.speed = 0.1;
+					CurrentFrame += 0.005*time;
+					if (CurrentFrame > 3) CurrentFrame -= 3;
+					hero.sprite.setTextureRect(IntRect(50 * int(CurrentFrame), 150, 50, 50));
+
+				}
+
+				if ((Keyboard::isKeyPressed(Keyboard::Down) || (Keyboard::isKeyPressed(Keyboard::S)))) { 
+					hero.dir = 2; hero.speed = 0.1;
+					CurrentFrame += 0.005*time; 
+					if (CurrentFrame > 3) CurrentFrame -= 3; 
+					hero.sprite.setTextureRect(IntRect(50 * int(CurrentFrame), 100, 50, 50));
+
+				}
+
+				hero.update(time);
+				
+				window.clear();
+				window.draw(hero.sprite);
+
 			}
 		}
+		
 		window.display();
+		
 	}
 	return 0;
 }
