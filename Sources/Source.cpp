@@ -10,9 +10,11 @@ using namespace sf;
 #include "Leha.h"
 #include "Misha.h"
 
+
+
 int main()
 {
-	//выбор положния для элементов стартового меню
+	// select position for start menu items
 	yesButton.sprite.setPosition(300, 400);
 	noButton.sprite.setPosition(700, 400);
 	yesActiveButton.sprite.setPosition(300, 400);
@@ -30,22 +32,16 @@ int main()
 	quitActiveButton.sprite.setPosition(700, 650);
 
 	RenderWindow window(VideoMode(1200, 800), "Bomberman");
+	
+	// To add a character
+	Player hero("Data/heroBomb.png", 250, 250, 50.0, 50.0);// create hero object of class player
 
-	//Для добавления персонажа
-	Texture herotexture;
-	herotexture.loadFromFile("Data/heroBomb.png");
-
-	Sprite herosprite;
-	herosprite.setTexture(herotexture);
-	herosprite.setTextureRect(IntRect(0, 0, 50, 50));
-	herosprite.setPosition(250, 250);
-
-	float CurrentFrame = 0;//хранит текущий кадр
+	float CurrentFrame = 0;// stores the current frame
 	Clock clock;
 
 	while (window.isOpen())
 	{
-		//Для хранения координат мыши
+		// To store the mouse coordinates
 		Vector2i pixelPos = Mouse::getPosition(window);
 		Vector2f pos = window.mapPixelToCoords(pixelPos);
 
@@ -93,7 +89,7 @@ int main()
 		}
 
 		window.clear();
-		if (!inGame) //отрисовка начального меню, если пользователь еще не начал игру
+		if (!inGame) // draw the initial menu if the user has not started the game yet
 		{
 			window.draw(background.sprite);
 			window.draw(bomberMan.sprite);
@@ -118,52 +114,50 @@ int main()
 			}
 			
 			if (levelInProcess)
-			{
-				
+			{    
 				// there will be action
 				window.clear();
+
 				
 				float time = clock.getElapsedTime().asMicroseconds();
 				clock.restart();
 				time = time / 800;
+				// character with animation
+				if ((Keyboard::isKeyPressed(Keyboard::Left) || (Keyboard::isKeyPressed(Keyboard::A)))) {
+					hero.dir = 1; hero.speed = 0.1;
+					CurrentFrame += 0.005*time;
+					if (CurrentFrame > 5) CurrentFrame -= 5;
+					hero.sprite.setTextureRect(IntRect(50 * int(CurrentFrame), 50, 50, 50));
+				}
 
-				//Управление персонажем с анимацией
+				if ((Keyboard::isKeyPressed(Keyboard::Right) || (Keyboard::isKeyPressed(Keyboard::D)))) {
+					hero.dir = 0; hero.speed = 0.1;
+					CurrentFrame += 0.005*time;
+					if (CurrentFrame > 5) CurrentFrame -= 5;
+					hero.sprite.setTextureRect(IntRect(50 * int(CurrentFrame), 0, 50, 50));
+				}
+
+				if ((Keyboard::isKeyPressed(Keyboard::Up) || (Keyboard::isKeyPressed(Keyboard::W)))) {
+					hero.dir = 3; hero.speed = 0.1;
+					CurrentFrame += 0.005*time;
+					if (CurrentFrame > 3) CurrentFrame -= 3;
+					hero.sprite.setTextureRect(IntRect(50 * int(CurrentFrame), 150, 50, 50));
+
+				}
+
+				if ((Keyboard::isKeyPressed(Keyboard::Down) || (Keyboard::isKeyPressed(Keyboard::S)))) { 
+					hero.dir = 2; hero.speed = 0.1;
+					CurrentFrame += 0.005*time; 
+					if (CurrentFrame > 3) CurrentFrame -= 3; 
+					hero.sprite.setTextureRect(IntRect(50 * int(CurrentFrame), 100, 50, 50));
+
+				}
+
+				hero.update(time);
 				
-				if ((Keyboard::isKeyPressed(Keyboard::Left) || (Keyboard::isKeyPressed(Keyboard::A)))) 
-				{ 
-					CurrentFrame += 0.005*time; //служит для прохождения по кадрам
-					if (CurrentFrame > 5) CurrentFrame -= 5; 
-					herosprite.setTextureRect(IntRect(50 * int(CurrentFrame), 50, 50, 50)); 
-					herosprite.move(-0.1*time, 0);
-				}
-
-				if ((Keyboard::isKeyPressed(Keyboard::Right) || (Keyboard::isKeyPressed(Keyboard::D)))) 
-				{
-					CurrentFrame += 0.005*time; 
-					if (CurrentFrame > 5) CurrentFrame -= 5; 
-					herosprite.setTextureRect(IntRect(50 * int(CurrentFrame), 0, 50, 50)); 
-					herosprite.move(0.1*time, 0);
-
-				}
-
-				if ((Keyboard::isKeyPressed(Keyboard::Up) || (Keyboard::isKeyPressed(Keyboard::W)))) 
-				{
-					CurrentFrame += 0.005*time; 
-					if (CurrentFrame > 3) CurrentFrame -= 3; 
-					herosprite.setTextureRect(IntRect(50 * int(CurrentFrame), 150, 50, 50)); 
-					herosprite.move(0, -0.1*time);
-				}
-
-				if ((Keyboard::isKeyPressed(Keyboard::Down) || (Keyboard::isKeyPressed(Keyboard::S)))) 
-				{
-					CurrentFrame += 0.005*time; 
-					if (CurrentFrame > 3) CurrentFrame -= 3; 
-					herosprite.setTextureRect(IntRect(50 * int(CurrentFrame), 100, 50, 50)); 
-					herosprite.move(0, 0.1*time);
-				}
-
 				window.clear();
-				window.draw(herosprite);
+				window.draw(hero.sprite);
+
 			}
 		}
 		
