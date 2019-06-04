@@ -1,5 +1,8 @@
 #pragma once
 //—юда пишем прототипы функций
+
+using namespace sf;
+
 class Player {
 public:
 	float x, y, w, h, dx, dy, speed = 0; //player coordinates x and y, height width, acceleration (in x and y), speed
@@ -19,9 +22,9 @@ public:
 		sprite.setTextureRect(IntRect(0, 0, w, h));
 	}
 
+	void block_Motion();
 
-
-	void update(float time) // function of "update" the class object.
+	void update(float time, Player & hero) // function of "update" the class object.
 	{
 		switch (dir)
 		{
@@ -36,9 +39,12 @@ public:
 
 		speed = 0;
 		sprite.setPosition(x, y);
+		this->block_Motion();
 	}
+
+	
 };
 
 
 // To add a character
-Player hero("Data/heroBomb.png", 250, 250, 50.0, 50.0);// create hero object of class player
+// create hero object of class player
