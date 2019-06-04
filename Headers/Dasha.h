@@ -1,11 +1,13 @@
 #pragma once
 //—юда пишем прототипы функций
+#include "Leha.h"
 
 using namespace sf;
 
 class Player {
 public:
 	float x, y, w, h, dx, dy, speed = 0; //player coordinates x and y, height width, acceleration (in x and y), speed
+	int healPoints = 3, level = 1;
 	int dir = 0; //player direction
 	String File;
 	Image image;
@@ -24,27 +26,8 @@ public:
 
 	void block_Motion();
 
-	void update(float time, Player & hero) // function of "update" the class object.
-	{
-		switch (dir)
-		{
-		case 0: dx = speed; dy = 0;   break;
-		case 1: dx = -speed; dy = 0;   break;
-		case 2: dx = 0; dy = speed;   break;
-		case 3: dx = 0; dy = -speed;   break;
-		}
+	void update(float time, Player & hero);
 
-		x += dx * time;
-		y += dy * time;
+	void move(float time, float& currentFrame, Player& hero, StageMap& mainMap, View& view, Sprite& stage, Sprite& timeInfo, Sprite& health);
 
-		speed = 0;
-		sprite.setPosition(x, y);
-		this->block_Motion();
-	}
-
-	
 };
-
-
-// To add a character
-// create hero object of class player
