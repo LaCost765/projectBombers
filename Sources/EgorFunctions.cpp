@@ -21,8 +21,8 @@ void Player::move(float time, float& CurrentFrame, Player& hero, StageMap& mainM
 
 						hero.dir = 2; hero.speed = 0.1;
 						CurrentFrame += 0.006*time;
-						if (CurrentFrame > 5) CurrentFrame -= 5;
-						hero.sprite.setTextureRect(IntRect(50 * int(CurrentFrame), 50, 50, 50));
+						if (CurrentFrame > 3) CurrentFrame -= 3;
+						hero.sprite.setTextureRect(IntRect(50 * int(CurrentFrame), 100, 50, 50));
 						mainMap.camera_Follow(hero.x, hero.y, view, stage, timeInfo, health);
 						return;
 					}
@@ -36,8 +36,8 @@ void Player::move(float time, float& CurrentFrame, Player& hero, StageMap& mainM
 			{
 				hero.dir = 3; hero.speed = 0.1;
 				CurrentFrame += 0.006*time;
-				if (CurrentFrame > 5) CurrentFrame -= 5;
-				hero.sprite.setTextureRect(IntRect(50 * int(CurrentFrame), 50, 50, 50));
+				if (CurrentFrame > 3) CurrentFrame -= 3;
+				hero.sprite.setTextureRect(IntRect(50 * int(CurrentFrame), 150, 50, 50));
 				mainMap.camera_Follow(hero.x, hero.y, view, stage, timeInfo, health);
 				return;
 			}
@@ -67,8 +67,8 @@ void Player::move(float time, float& CurrentFrame, Player& hero, StageMap& mainM
 
 						hero.dir = 2; hero.speed = 0.1;
 						CurrentFrame += 0.006*time;
-						if (CurrentFrame > 5) CurrentFrame -= 5;
-						hero.sprite.setTextureRect(IntRect(50 * int(CurrentFrame), 0, 50, 50));
+						if (CurrentFrame > 3) CurrentFrame -= 3;
+						hero.sprite.setTextureRect(IntRect(50 * int(CurrentFrame), 100, 50, 50));
 						mainMap.camera_Follow(hero.x, hero.y, view, stage, timeInfo, health);
 						return;
 					}
@@ -82,8 +82,8 @@ void Player::move(float time, float& CurrentFrame, Player& hero, StageMap& mainM
 			{
 				hero.dir = 3; hero.speed = 0.1;
 				CurrentFrame += 0.006*time;
-				if (CurrentFrame > 5) CurrentFrame -= 5;
-				hero.sprite.setTextureRect(IntRect(50 * int(CurrentFrame), 0, 50, 50));
+				if (CurrentFrame > 3) CurrentFrame -= 3;
+				hero.sprite.setTextureRect(IntRect(50 * int(CurrentFrame), 150, 50, 50));
 				mainMap.camera_Follow(hero.x, hero.y, view, stage, timeInfo, health);
 				return;
 			}

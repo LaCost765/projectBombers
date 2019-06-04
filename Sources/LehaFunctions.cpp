@@ -28,7 +28,6 @@ void Player::block_Motion()
 {
 	for (int i = (this->y - SHIFT) / 50; i < (this->y - SHIFT + this->h) / 50; ++i)
 	{
-		std::cout << this->x << " " << this->y << std::endl;
 		for (int j = this->x / 50; j < (this->x + this->w) / 50; ++j)
 		{
 			if (tileMap[i][j] == 'w' || tileMap[i][j] == 'b')
