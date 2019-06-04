@@ -6,31 +6,20 @@
 #include <SFML/Graphics.hpp>
 using namespace sf;
 
-#include "commonData.h"
 #include "Dasha.h"
 #include "Egor.h"	
 #include "Leha.h"
 #include "Misha.h"
-
+#include "commonData.h"
 
 
 int main()
-{  
+{
 	srand(time(0));
-
-	setParametrs();
 	RenderWindow window(VideoMode(1200, 800), "Bomberman");
-	
-
-
 	float CurrentFrame = 0;// stores the current frame
 	Clock clock;
-
-	Player hero("Data/heroBomb.png", 50, 50, 50.0, 50.0);
-	StageMap mainMap;
-	mainMap.box_Generator(mainMap.lvl);
-	View view;
-
+	mainMap.box_Generator(hero.level);
 	view.reset(FloatRect(0, 0, 1200, 800));
 
 	while (window.isOpen())
@@ -54,12 +43,12 @@ int main()
 					{
 						if (quitButton.sprite.getGlobalBounds().contains(pos.x, pos.y)) window.close();
 						if (newGameButton.sprite.getGlobalBounds().contains(pos.x, pos.y)) { newGameMenu = true; inGame = true; }
-						if (continueButton.sprite.getGlobalBounds().contains(pos.x, pos.y)) 
-						{ 
+						if (continueButton.sprite.getGlobalBounds().contains(pos.x, pos.y))
+						{
 							levelInProcess = true;
 							std::ifstream fin("Data/level.txt");
-							fin >> level;
-							inGame = true; 
+							fin >> hero.level;
+							inGame = true;
 						}
 					}
 					else
@@ -70,7 +59,7 @@ int main()
 							{
 								newGameMenu = false;
 								levelInProcess = true;
-								level = 1;
+								hero.level = 1;
 							}
 
 							if (noButton.sprite.getGlobalBounds().contains(pos.x, pos.y))
@@ -107,60 +96,39 @@ int main()
 				if (noButton.sprite.getGlobalBounds().contains(pos.x, pos.y)) window.draw(noActiveButton.sprite);
 				else window.draw(noButton.sprite);
 			}
-			
+
 			if (levelInProcess)
-			{    
+			{
 				// there will be action
 				window.clear();
 				float time = clock.getElapsedTime().asMicroseconds();
 				clock.restart();
 				time = time / 800;
 				// character with animation
-				if ((Keyboard::isKeyPressed(Keyboard::Left) || (Keyboard::isKeyPressed(Keyboard::A)))) {
-					hero.dir = 1; hero.speed = 0.1;
-					CurrentFrame += 0.005*time;
-					if (CurrentFrame > 5) CurrentFrame -= 5;
-					hero.sprite.setTextureRect(IntRect(50 * int(CurrentFrame), 50, 50, 50));
-					mainMap.camera_Follow(hero.x, hero.y, view);
-				}
 
-				if ((Keyboard::isKeyPressed(Keyboard::Right) || (Keyboard::isKeyPressed(Keyboard::D)))) {
-					hero.dir = 0; hero.speed = 0.1;
-					CurrentFrame += 0.005*time;
-					if (CurrentFrame > 5) CurrentFrame -= 5;
-					hero.sprite.setTextureRect(IntRect(50 * int(CurrentFrame), 0, 50, 50));
-					mainMap.camera_Follow(hero.x, hero.y,view);
-				}
-
-				if ((Keyboard::isKeyPressed(Keyboard::Up) || (Keyboard::isKeyPressed(Keyboard::W)))) {
-					hero.dir = 3; hero.speed = 0.1;
-					CurrentFrame += 0.005*time;
-					if (CurrentFrame > 3) CurrentFrame -= 3;
-					hero.sprite.setTextureRect(IntRect(50 * int(CurrentFrame), 150, 50, 50));
-				}
-
-				if ((Keyboard::isKeyPressed(Keyboard::Down) || (Keyboard::isKeyPressed(Keyboard::S)))) { 
-					hero.dir = 2; hero.speed = 0.1;
-					CurrentFrame += 0.005*time; 
-					if (CurrentFrame > 3) CurrentFrame -= 3; 
-					hero.sprite.setTextureRect(IntRect(50 * int(CurrentFrame), 100, 50, 50));
-				}
+				hero.move(time, CurrentFrame, hero, mainMap, view, stage1Header.sprite, timeInfoHeader.sprite, health.sprite);
 
 				hero.update(time, hero);
 
 				window.setView(view);
-				
+
 				window.clear();
 
 				mainMap.draw_Map(window);
 
 				window.draw(hero.sprite);
 
+				window.draw(stage1Header.sprite);
+
+				window.draw(timeInfoHeader.sprite);
+
+				health.sprite.setTextureRect(IntRect(3 - hero.healPoints, 0, 150, 50));
+				window.draw(health.sprite);
 			}
 		}
-		
+
 		window.display();
-		
+
 	}
 	return 0;
 }

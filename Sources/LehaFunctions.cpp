@@ -1,4 +1,5 @@
 #include <SFML/Graphics.hpp>
+#include <iostream>
 #include "Leha.h"
 #include "Dasha.h"
 
@@ -17,22 +18,22 @@ void StageMap::draw_Map(RenderWindow& window)
 			default: break;
 			}
 
-			mapSprite.setPosition(j * 50, i * 50);
+			mapSprite.setPosition(j * 50, i * 50 + SHIFT);
 			window.draw(mapSprite);
 		}
 	}
 };
 
-void Player:: block_Motion()
+void Player::block_Motion()
 {
-	for (int i = (this->y)	 / 50; i < (this->y + this->h) / 50; ++i)
+	for (int i = (this->y - SHIFT) / 50; i < (this->y - SHIFT + this->h) / 50; ++i)
 	{
 		for (int j = this->x / 50; j < (this->x + this->w) / 50; ++j)
 		{
 			if (tileMap[i][j] == 'w' || tileMap[i][j] == 'b')
 			{
-				if (this->dy > 0) { this->y = i * 50 - this->h; }
-				if (this->dy < 0) { this->y = i * 50 + 50; }
+				if (this->dy > 0) { this->y = i * 50 - this->h + SHIFT; }
+				if (this->dy < 0) { this->y = i * 50 + 50 + SHIFT; }
 				if (this->dx > 0) { this->x = j * 50 - this->w; }
 				if (this->dx < 0) { this->x = j * 50 + 50; }
 			}
@@ -41,24 +42,38 @@ void Player:: block_Motion()
 	}
 }
 
-void StageMap:: camera_Follow(float x, float y, View & view)
+void StageMap::camera_Follow(float x, float y, View & view, Sprite& stage, Sprite& time, Sprite& health)
 {
 	float tempX = x; float tempY = y;
 
 	if (x < 600) tempX = 600;
-	if (y < 800) tempY = 400;	
+	else
+	{
+		time.setPosition(x - 600 + 400, time.getPosition().y);
+		stage.setPosition(x - 600, stage.getPosition().y);
+		health.setPosition(x - 600 + 1050, health.getPosition().y);
+	}
+	if (x > 2050)
+	{
+		tempX = 2050;
+		time.setPosition(2050 - 600 + 400, time.getPosition().y);
+		stage.setPosition(2050 - 600, stage.getPosition().y);
+		health.setPosition(2050 - 600 + 1050, health.getPosition().y);
+	}
+	if (y < 900) tempY = 400;
+
 
 	view.setCenter(tempX, tempY);
 }
 
 void StageMap::box_Generator(int lvl)
 {
-	int numberOfBoxes = 180+(lvl*15);
+	int numberOfBoxes = 180 + (lvl * 15);
 	for (int i = 0; i < numberOfBoxes; ++i)
 	{
 		int xBoxCord = 1 + rand() % 51;
 		int yBoxCord = 1 + rand() % 13;
-		if (tileMap[yBoxCord][xBoxCord] == ' '&&(xBoxCord > 4 || yBoxCord > 4))
+		if (tileMap[yBoxCord][xBoxCord] == ' ' && (xBoxCord > 4 || yBoxCord > 4))
 		{
 			tileMap[yBoxCord][xBoxCord] = 'b';
 		}
