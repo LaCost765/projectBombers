@@ -1,12 +1,14 @@
 #include <iostream>
 #include <fstream>
 #include <sstream>
+#include <ctime>
+#include <cstdlib>
 #include <SFML/Graphics.hpp>
 using namespace sf;
 
 #include "commonData.h"
 #include "Dasha.h"
-#include "Egor.h"
+#include "Egor.h"	
 #include "Leha.h"
 #include "Misha.h"
 
@@ -14,6 +16,7 @@ using namespace sf;
 
 int main()
 {  
+	srand(time(0));
 
 	setParametrs();
 	RenderWindow window(VideoMode(1200, 800), "Bomberman");
@@ -23,6 +26,13 @@ int main()
 	float CurrentFrame = 0;// stores the current frame
 	Clock clock;
 
+	Player hero("Data/heroBomb.png", 50, 50, 50.0, 50.0);
+	StageMap mainMap;
+	mainMap.box_Generator(mainMap.lvl);
+	View view;
+
+	view.reset(FloatRect(0, 0, 1200, 800));
+
 	while (window.isOpen())
 	{
 		// To store the mouse coordinates
@@ -30,6 +40,7 @@ int main()
 		Vector2f pos = window.mapPixelToCoords(pixelPos);
 
 		Event event;
+
 
 		while (window.pollEvent(event))
 		{
@@ -101,8 +112,6 @@ int main()
 			{    
 				// there will be action
 				window.clear();
-
-				
 				float time = clock.getElapsedTime().asMicroseconds();
 				clock.restart();
 				time = time / 800;
@@ -112,6 +121,7 @@ int main()
 					CurrentFrame += 0.005*time;
 					if (CurrentFrame > 5) CurrentFrame -= 5;
 					hero.sprite.setTextureRect(IntRect(50 * int(CurrentFrame), 50, 50, 50));
+					mainMap.camera_Follow(hero.x, hero.y, view);
 				}
 
 				if ((Keyboard::isKeyPressed(Keyboard::Right) || (Keyboard::isKeyPressed(Keyboard::D)))) {
@@ -119,6 +129,7 @@ int main()
 					CurrentFrame += 0.005*time;
 					if (CurrentFrame > 5) CurrentFrame -= 5;
 					hero.sprite.setTextureRect(IntRect(50 * int(CurrentFrame), 0, 50, 50));
+					mainMap.camera_Follow(hero.x, hero.y,view);
 				}
 
 				if ((Keyboard::isKeyPressed(Keyboard::Up) || (Keyboard::isKeyPressed(Keyboard::W)))) {
@@ -126,7 +137,6 @@ int main()
 					CurrentFrame += 0.005*time;
 					if (CurrentFrame > 3) CurrentFrame -= 3;
 					hero.sprite.setTextureRect(IntRect(50 * int(CurrentFrame), 150, 50, 50));
-
 				}
 
 				if ((Keyboard::isKeyPressed(Keyboard::Down) || (Keyboard::isKeyPressed(Keyboard::S)))) { 
@@ -134,12 +144,16 @@ int main()
 					CurrentFrame += 0.005*time; 
 					if (CurrentFrame > 3) CurrentFrame -= 3; 
 					hero.sprite.setTextureRect(IntRect(50 * int(CurrentFrame), 100, 50, 50));
-
 				}
 
-				hero.update(time);
+				hero.update(time, hero);
+
+				window.setView(view);
 				
 				window.clear();
+
+				mainMap.draw_Map(window);
+
 				window.draw(hero.sprite);
 
 			}
