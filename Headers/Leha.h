@@ -6,7 +6,16 @@ constexpr auto MAP_WIDTH = 53;
 
 using namespace sf;
 
-static    String tileMap[MAP_HEIGHT] = {
+
+
+
+class StageMap
+{
+public:
+	Image mapImage;
+	Texture mapTexture;
+	Sprite mapSprite;
+	String tileMap[MAP_HEIGHT] = {
 	"wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww",
 	"w                                                   w",
 	"w w w w w w w w w w w w w w w w w w w w w w w w w w w",
@@ -22,16 +31,7 @@ static    String tileMap[MAP_HEIGHT] = {
 	"w w w w w w w w w w w w w w w w w w w w w w w w w w w",
 	"w                                                   w",
 	"wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww"
-};
-
-
-class StageMap
-{
-public:
-	Image mapImage;
-	Texture mapTexture;
-	Sprite mapSprite;
-
+	};
 	StageMap() {
 		mapImage.loadFromFile("Data/mapTileSet.png");
 		mapTexture.loadFromImage(mapImage);

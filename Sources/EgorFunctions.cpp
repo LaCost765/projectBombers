@@ -10,13 +10,13 @@ void Player::move(float time, float& CurrentFrame, Player& hero, StageMap& mainM
 {
 	if ((Keyboard::isKeyPressed(Keyboard::Left) || (Keyboard::isKeyPressed(Keyboard::A)))) {
 
-		if (tileMap[int((this->y - SHIFT) / 50)][int(this->x / 50) - 1] == 'w' || tileMap[int((this->y - SHIFT) / 50)][int(this->x / 50) - 1] == 'b')
+		if (mainMap.tileMap[int((this->y - SHIFT) / 50)][int(this->x / 50) - 1] == 'w' || mainMap.tileMap[int((this->y - SHIFT) / 50)][int(this->x / 50) - 1] == 'b')
 		{
-			if (tileMap[int((this->y - SHIFT) / 50) - 1][int(this->x / 50) - 1] == ' ' || tileMap[int((this->y - SHIFT) / 50) + 1][int(this->x / 50) - 1] == ' ')
+			if (mainMap.tileMap[int((this->y - SHIFT) / 50) - 1][int(this->x / 50) - 1] == ' ' || mainMap.tileMap[int((this->y - SHIFT) / 50) + 1][int(this->x / 50) - 1] == ' ')
 			{
 				if (this->x == int(this->x / 50) * 50)
 				{
-					if (this->y - int(this->y / 50) * 50 >= 25 && tileMap[int((this->y - SHIFT) / 50) + 1][int(this->x / 50) - 1] == ' ')
+					if (this->y - int(this->y / 50) * 50 >= 25 && mainMap.tileMap[int((this->y - SHIFT) / 50) + 1][int(this->x / 50) - 1] == ' ')
 					{
 
 						hero.dir = 2; hero.speed = 0.1;
@@ -30,7 +30,7 @@ void Player::move(float time, float& CurrentFrame, Player& hero, StageMap& mainM
 			}
 		}
 
-		if (tileMap[int((this->y - SHIFT) / 50)][int(this->x / 50) - 1] == ' ' && this->y - int(this->y / 50) * 50 < 25)
+		if (mainMap.tileMap[int((this->y - SHIFT) / 50)][int(this->x / 50) - 1] == ' ' && this->y - int(this->y / 50) * 50 < 25)
 		{
 			if (this->y != int(this->y / 50) * 50 && this->y - int(this->y / 50) * 50 > 1)
 			{
@@ -56,13 +56,13 @@ void Player::move(float time, float& CurrentFrame, Player& hero, StageMap& mainM
 
 	if ((Keyboard::isKeyPressed(Keyboard::Right) || (Keyboard::isKeyPressed(Keyboard::D)))) {
 
-		if (tileMap[int(this->y - SHIFT) / 50][int(this->x / 50) + 1] == 'w' || tileMap[int(this->y - SHIFT) / 50][int(this->x / 50) + 1] == 'b')
+		if (mainMap.tileMap[int(this->y - SHIFT) / 50][int(this->x / 50) + 1] == 'w' || mainMap.tileMap[int(this->y - SHIFT) / 50][int(this->x / 50) + 1] == 'b')
 		{
-			if (tileMap[int(this->y - SHIFT) / 50 + 1][int(this->x / 50) + 1] == ' ' || tileMap[int(this->y - SHIFT) / 50 - 1][int(this->x / 50) + 1] == ' ')
+			if (mainMap.tileMap[int(this->y - SHIFT) / 50 + 1][int(this->x / 50) + 1] == ' ' || mainMap.tileMap[int(this->y - SHIFT) / 50 - 1][int(this->x / 50) + 1] == ' ')
 			{
 				if (this->x == int(this->x / 50) * 50)
 				{
-					if (this->y - int(this->y / 50) * 50 >= 25 && tileMap[int((this->y - SHIFT) / 50) + 1][int(this->x / 50) + 1] == ' ')
+					if (this->y - int(this->y / 50) * 50 >= 25 && mainMap.tileMap[int((this->y - SHIFT) / 50) + 1][int(this->x / 50) + 1] == ' ')
 					{
 
 						hero.dir = 2; hero.speed = 0.1;
@@ -76,7 +76,7 @@ void Player::move(float time, float& CurrentFrame, Player& hero, StageMap& mainM
 			}
 		}
 
-		if (tileMap[int((this->y - SHIFT) / 50)][int(this->x / 50) + 1] == ' ' && this->y - int(this->y / 50) * 50 < 25)
+		if (mainMap.tileMap[int((this->y - SHIFT) / 50)][int(this->x / 50) + 1] == ' ' && this->y - int(this->y / 50) * 50 < 25)
 		{
 			if (this->y != int(this->y / 50) * 50 && this->y - int(this->y / 50) * 50 > 1)
 			{
@@ -102,13 +102,13 @@ void Player::move(float time, float& CurrentFrame, Player& hero, StageMap& mainM
 
 	if ((Keyboard::isKeyPressed(Keyboard::Up) || (Keyboard::isKeyPressed(Keyboard::W)))) {
 
-		if (tileMap[int((this->y - SHIFT) / 50) - 1][int(this->x / 50)] == 'w' || tileMap[int((this->y - SHIFT) / 50) - 1][int(this->x / 50)] == 'b')
+		if (mainMap.tileMap[int((this->y - SHIFT) / 50) - 1][int(this->x / 50)] == 'w' || mainMap.tileMap[int((this->y - SHIFT) / 50) - 1][int(this->x / 50)] == 'b')
 		{
-			if (tileMap[int((this->y - SHIFT) / 50) - 1][int(this->x / 50) - 1] == ' ' || tileMap[int((this->y - SHIFT) / 50) - 1][int(this->x / 50) + 1] == ' ')
+			if (mainMap.tileMap[int((this->y - SHIFT) / 50) - 1][int(this->x / 50) - 1] == ' ' || mainMap.tileMap[int((this->y - SHIFT) / 50) - 1][int(this->x / 50) + 1] == ' ')
 			{
 				if (this->y == int(this->y / 50) * 50)
 				{
-					if (this->x - int(this->x / 50) * 50 >= 25 && tileMap[int((this->y - SHIFT) / 50) - 1][int(this->x / 50) + 1] == ' ')
+					if (this->x - int(this->x / 50) * 50 >= 25 && mainMap.tileMap[int((this->y - SHIFT) / 50) - 1][int(this->x / 50) + 1] == ' ')
 					{
 
 						hero.dir = 0; hero.speed = 0.1;
@@ -122,7 +122,7 @@ void Player::move(float time, float& CurrentFrame, Player& hero, StageMap& mainM
 			}
 		}
 
-		if (tileMap[int((this->y - SHIFT) / 50) - 1][int(this->x / 50)] == ' ' && this->x - int(this->x / 50) * 50 < 25)
+		if (mainMap.tileMap[int((this->y - SHIFT) / 50) - 1][int(this->x / 50)] == ' ' && this->x - int(this->x / 50) * 50 < 25)
 		{
 			if (this->x != int(this->x / 50) * 50 && this->x - int(this->x / 50) * 50 > 1)
 			{
@@ -147,13 +147,13 @@ void Player::move(float time, float& CurrentFrame, Player& hero, StageMap& mainM
 
 	if ((Keyboard::isKeyPressed(Keyboard::Down) || (Keyboard::isKeyPressed(Keyboard::S)))) {
 
-		if (tileMap[int((this->y - SHIFT) / 50) + 1][int(this->x / 50)] == 'w' || tileMap[int((this->y - SHIFT) / 50) + 1][int(this->x / 50)] == 'b')
+		if (mainMap.tileMap[int((this->y - SHIFT) / 50) + 1][int(this->x / 50)] == 'w' || mainMap.tileMap[int((this->y - SHIFT) / 50) + 1][int(this->x / 50)] == 'b')
 		{
-			if (tileMap[int((this->y - SHIFT) / 50) + 1][int(this->x / 50) + 1] == ' ' || tileMap[int((this->y - SHIFT) / 50) + 1][int(this->x / 50) - 1] == ' ')
+			if (mainMap.tileMap[int((this->y - SHIFT) / 50) + 1][int(this->x / 50) + 1] == ' ' || mainMap.tileMap[int((this->y - SHIFT) / 50) + 1][int(this->x / 50) - 1] == ' ')
 			{
 				if (this->y == int(this->y / 50) * 50)
 				{
-					if (this->x - int(this->x / 50) * 50 >= 25 && tileMap[int((this->y - SHIFT) / 50) + 1][int(this->x / 50) + 1] == ' ')
+					if (this->x - int(this->x / 50) * 50 >= 25 && mainMap.tileMap[int((this->y - SHIFT) / 50) + 1][int(this->x / 50) + 1] == ' ')
 					{
 
 						hero.dir = 0; hero.speed = 0.1;
@@ -167,7 +167,7 @@ void Player::move(float time, float& CurrentFrame, Player& hero, StageMap& mainM
 			}
 		}
 
-		if (tileMap[int((this->y - SHIFT) / 50) + 1][int(this->x / 50)] == ' ' && this->x - int(this->x / 50) * 50 < 25)
+		if (mainMap.tileMap[int((this->y - SHIFT) / 50) + 1][int(this->x / 50)] == ' ' && this->x - int(this->x / 50) * 50 < 25)
 		{
 			if (this->x != int(this->x / 50) * 50 && this->x - int(this->x / 50) * 50 > 1)
 			{
@@ -191,7 +191,7 @@ void Player::move(float time, float& CurrentFrame, Player& hero, StageMap& mainM
 	}
 }
 
-void Player::update(float time, Player & hero) // function of "update" the class object.
+void Player::update(float time, Player & hero, StageMap& mainMap) // function of "update" the class object.
 {
 	switch (dir)
 	{
@@ -206,5 +206,5 @@ void Player::update(float time, Player & hero) // function of "update" the class
 
 	speed = 0;
 	sprite.setPosition(x, y);
-	this->block_Motion();
+	this->block_Motion(mainMap);
 }

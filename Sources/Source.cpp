@@ -17,10 +17,11 @@ int main()
 {
 	srand(time(0));
 	RenderWindow window(VideoMode(1200, 800), "Bomberman");
-	float CurrentFrame = 0;// stores the current frame
+	float CurrentFrame = 0, CurrentFrame1 = 0;// stores the current frame
 	Clock clock;
 	mainMap.box_Generator(hero.level);
 	view.reset(FloatRect(0, 0, 1200, 800));
+	
 
 	while (window.isOpen())
 	{
@@ -49,6 +50,7 @@ int main()
 							std::ifstream fin("Data/level.txt");
 							fin >> hero.level;
 							inGame = true;
+							clock.restart();
 						}
 					}
 					else
@@ -60,6 +62,7 @@ int main()
 								newGameMenu = false;
 								levelInProcess = true;
 								hero.level = 1;
+								clock.restart();
 							}
 
 							if (noButton.sprite.getGlobalBounds().contains(pos.x, pos.y))
@@ -104,11 +107,15 @@ int main()
 				float time = clock.getElapsedTime().asMicroseconds();
 				clock.restart();
 				time = time / 800;
+				std::cout << time << std::endl;
 				// character with animation
 
 				hero.move(time, CurrentFrame, hero, mainMap, view, stage1Header.sprite, timeInfoHeader.sprite, health.sprite);
 
-				hero.update(time, hero);
+				hero.update(time, hero, mainMap);
+
+				enemySp.movement(time, CurrentFrame1, mainMap);
+				enemySp.update2(time, mainMap);
 
 				window.setView(view);
 
@@ -117,6 +124,8 @@ int main()
 				mainMap.draw_Map(window);
 
 				window.draw(hero.sprite);
+
+				window.draw(enemySp.sprite);
 
 				window.draw(stage1Header.sprite);
 
