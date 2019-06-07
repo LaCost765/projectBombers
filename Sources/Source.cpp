@@ -18,6 +18,7 @@ int main()
 	srand(time(0));
 	RenderWindow window(VideoMode(1200, 800), "Bomberman");
 	float CurrentFrame = 0, CurrentFrame1 = 0;// stores the current frame
+
 	Clock clock;
 	mainMap.box_Generator(hero.level);
 	view.reset(FloatRect(0, 0, 1200, 800));
@@ -113,6 +114,9 @@ int main()
 
 				hero.update(time, hero, mainMap);
 
+				bomba.placeBomb(time, hero);
+
+
 				enemySp.movement(time, CurrentFrame1, mainMap);
 				enemySp.update2(time, mainMap);
 
@@ -123,6 +127,8 @@ int main()
 				mainMap.draw_Map(window);
 
 				window.draw(hero.sprite);
+
+				window.draw(bomba.sprite);
 
 				window.draw(enemySp.sprite);
 

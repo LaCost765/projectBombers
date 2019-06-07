@@ -40,3 +40,23 @@ public:
 	void move(float time, float& currentFrame, Player& hero, StageMap& mainMap, View& view, Sprite& stage, Sprite& timeInfo, Sprite& health);
 
 };
+
+class Bomba {
+public:
+	float x, y, w, h, flagBomb, CurrentFrameBomb = 0;
+	String File;
+	Image image;
+	Texture texture;
+	Sprite sprite;
+	Bomba(String F, float X, float Y, float W, float H, float flagBomb) {
+		File = F;
+		w = W; h = H;//height & width
+		image.loadFromFile(File);
+		texture.loadFromImage(image);
+		sprite.setTexture(texture);
+		x = X; y = Y;//sprite appearance coordinate
+		sprite.setTextureRect(IntRect(0, 0, w, h));
+	}
+
+	void placeBomb(float time, Player& hero);
+};
