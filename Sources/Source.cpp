@@ -112,9 +112,11 @@ int main()
 
 				hero.update(time, hero, mainMap);
 
+
 				enemySp.movement(time, enemySp.currentFrame, mainMap, clock);
 				enemySp.update(time, mainMap);
-				
+				bomba.placeBomb(time, hero);
+
 				window.setView(view);
 
 				window.clear();
@@ -122,6 +124,8 @@ int main()
 				mainMap.draw_Map(window);
 
 				window.draw(hero.sprite);
+
+				window.draw(bomba.sprite);
 
 				window.draw(enemySp.sprite);
 
