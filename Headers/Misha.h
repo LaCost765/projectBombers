@@ -12,9 +12,10 @@ public:
 	{
 		
 	}
-
+	bool dirJustChoosen = false;
 	void check(StageMap& mainMap);
-	void movement(float time, float& CurrentFrame, StageMap& mainMap);
-	void update2(float time, StageMap& mainMap);
-	int chooseDir();
+	void movement(float time, float& CurrentFrame, StageMap& mainMap, Clock& clock);
+	void place(StageMap& mainMap);
+	void update(float time, StageMap& mainMap);
+	int chooseDir(Clock& clock);
 };
