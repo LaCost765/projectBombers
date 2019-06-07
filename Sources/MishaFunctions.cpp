@@ -32,44 +32,52 @@ void Enemy::check(StageMap& mainMap)
 	}
 }
 
-void Enemy::movement(float time, float& CurrentFrame, StageMap& mainMap)
+void Enemy::movement(float time, float& CurrentFrame, StageMap& mainMap, Clock& clock)
 {
-	if (((this->y - int(this->y / 50) * 50) < 0.49) && ((this->x - int(this->x / 50) * 50) < 0.49))
+	if (((this->y - int(this->y / 50) * 50) < 1) && ((this->x - int(this->x / 50) * 50) < 1) && !this->dirJustChoosen)
 	{
+		this->x = int(this->x / 50) * 50;
+		this->y = int(this->y / 50) * 50;
 		check(mainMap);
-		this->dir = chooseDir();
+		this->dir = chooseDir(clock);
+		this->dirJustChoosen = true;
 	}
-	if (dir == 1)
+	else
 	{
-		this->speed = 0.1;
+		if (((this->y - int(this->y / 50) * 50) > 1 && (this->dir == 1 || this->dir == 2)) || ((this->x - int(this->x / 50) * 50) > 1 && (this->dir == 3 || this->dir == 4))) this->dirJustChoosen = false;
+	}
+
+	if (this->dir == 1)
+	{
+		this->speed = 0.07;
 		CurrentFrame += 0.006 * time;
 		if (CurrentFrame > 3) CurrentFrame -= 3;
 		this->sprite.setTextureRect(IntRect(50 * int(CurrentFrame), 150, 50, 50));
 	}
-	else if (this->dir == 2)
+	if (this->dir == 2)
 	{
-		this->speed = 0.1;
+		this->speed = 0.07;
 		CurrentFrame += 0.006 * time;
 		if (CurrentFrame > 3) CurrentFrame -= 3;
 		this->sprite.setTextureRect(IntRect(50 * int(CurrentFrame), 100, 50, 50));
 	}
-	else if (this->dir == 3)
+	if (this->dir == 3)
 	{
-		this->speed = 0.1;
+		this->speed = 0.07;
 		CurrentFrame += 0.006 * time;
 		if (CurrentFrame > 3) CurrentFrame -= 3;
 		this->sprite.setTextureRect(IntRect(50 * int(CurrentFrame), 50, 50, 50));
 	}
-	else if (this->dir == 4)
+	if (this->dir == 4)
 	{
-		this->speed = 0.1;
+		this->speed = 0.07;
 		CurrentFrame += 0.006 * time;
 		if (CurrentFrame > 3) CurrentFrame -= 3;
 		this->sprite.setTextureRect(IntRect(50 * int(CurrentFrame), 0, 50, 50));
 	}
 }
 
-void Enemy::update2(float time, StageMap& mainMap) // function of "update" the class object.
+void Enemy::update(float time, StageMap& mainMap) // function of "update" the class object.
 {
 	switch (dir)
 	{
@@ -86,9 +94,23 @@ void Enemy::update2(float time, StageMap& mainMap) // function of "update" the c
 	sprite.setPosition(x, y);
 }
 
-int Enemy::chooseDir()
+int Enemy::chooseDir(Clock& clock)
 {
-	int k = rand() % 4 + 1;
-	if (!this->dirs[k]) chooseDir();
-	else return k;
+	int result = 0;
+	while (result == 0)
+	{
+		int k = rand() % 4 + 1;
+		if (!this->dirs[k]) continue;
+		else
+		{
+			if (this->dir != 0 && ((dirs[1] + dirs[2] + dirs[3] + dirs[4]) > 1) && ((this->dir == 1 && k == 2) || (this->dir == 2 && k == 1) || (this->dir == 3 && k == 4) || (this->dir == 4 && k == 3)))  continue;
+			else result = k;
+		}
+	}
+	return result;
+}
+
+void Enemy::place(StageMap& mainMap)
+{
+
 }

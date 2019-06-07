@@ -7,6 +7,7 @@ using namespace sf;
 class Parent {
 public:
 	float x, y, w, h, dx, dy, speed = 0; //player coordinates x and y, height width, acceleration (in x and y), speed
+	float currentFrame = 0;
 	int dir = 0; //player direction
 	String File;
 	Image image;
