@@ -17,6 +17,7 @@ Picture stage1Header("Data/stage1Header.png", 0, 0, 300, 100, 0, 0);
 Picture timeInfoHeader("Data/timeHeader.png", 0, 0, 200, 100, 400, 0);
 Picture health("Data/health.png", 0, 0, 150, 150, 1050, 0);
 Player hero("Data/heroBomb.png", 50, 100, 50.0, 50.0);
+Enemy enemySp("Data/enemy.png", 50, 300, 50.0, 50.0);
 StageMap mainMap;
 View view;
 

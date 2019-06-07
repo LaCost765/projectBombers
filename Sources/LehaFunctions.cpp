@@ -22,15 +22,16 @@ void StageMap::draw_Map(RenderWindow& window)
 			window.draw(mapSprite);
 		}
 	}
+	
 };
 
-void Player::block_Motion()
+void Player::block_Motion(StageMap& mainMap)
 {
 	for (int i = (this->y - SHIFT) / 50; i < (this->y - SHIFT + this->h) / 50; ++i)
 	{
 		for (int j = this->x / 50; j < (this->x + this->w) / 50; ++j)
 		{
-			if (tileMap[i][j] == 'w' || tileMap[i][j] == 'b')
+			if (mainMap.tileMap[i][j] == 'w' || mainMap.tileMap[i][j] == 'b')
 			{
 				if (this->dy > 0) { this->y = i * 50 - this->h + SHIFT; }
 				if (this->dy < 0) { this->y = i * 50 + 50 + SHIFT; }
