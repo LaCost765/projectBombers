@@ -59,5 +59,5 @@ public:
 		sprite.setTextureRect(IntRect(0, 0, w, h));
 	}
 
-	void placeBomb(float time, Player& hero);
+	void placeBomb(float time, Player& hero, StageMap& mainMap);
 };
