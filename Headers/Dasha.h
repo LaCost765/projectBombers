@@ -1,7 +1,7 @@
 #pragma once
 //���� ����� ��������� �������
-#include "Leha.h"
 
+class StageMap;
 using namespace sf;
 
 class Parent {
@@ -29,7 +29,7 @@ public:
 class Player : public Parent
 {
 public:
-	int healPoints = 3, level = 1;
+	int healPoints = 3, level = 5;
 
 	Player(String F, float X, float Y, float W, float H) : Parent(F, X, Y, W, H)
 	{  

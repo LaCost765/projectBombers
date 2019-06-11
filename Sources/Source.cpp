@@ -4,6 +4,8 @@
 #include <ctime>
 #include <cstdlib>
 #include <SFML/Graphics.hpp>
+#include <vector>
+#include <list>
 using namespace sf;
 
 #include "Dasha.h"
@@ -21,6 +23,8 @@ int main()
 	mainMap.box_Generator(hero.level);
 	view.reset(FloatRect(0, 0, 1200, 800));
 	
+
+	generateEnemies(hero.level, enemies, mainMap);
 
 	while (window.isOpen())
 	{
@@ -106,15 +110,22 @@ int main()
 				float time = clock.getElapsedTime().asMicroseconds();
 				clock.restart();
 				time = time / 800;
+				if (time > 7)
+				{
+					time = 0;
+				}
+				
 				// character with animation
 
-				hero.move(time, hero.currentFrame, hero, mainMap, view, stage1Header.sprite, timeInfoHeader.sprite, health.sprite);
+				hero.move(time, hero.currentFrame, hero, mainMap, view, stage.sprite, timeInfoHeader.sprite, health.sprite);
 
 				hero.update(time, hero, mainMap);
 
 
-				enemySp.movement(time, enemySp.currentFrame, mainMap, clock);
-				enemySp.update(time, mainMap);
+
+				moveEnemies(enemies, enemies_iterator, time, mainMap, clock);
+				updateEnemies(enemies, enemies_iterator, time);
+        
 				bomba.placeBomb(time, hero, mainMap);
 
 				window.setView(view);
@@ -127,11 +138,17 @@ int main()
 
 				if(bomba.y !=0) window.draw(bomba.sprite);
 
-				window.draw(enemySp.sprite);
+				drawEnemies(enemies, enemies_iterator, window);
 
-				window.draw(stage1Header.sprite);
+				window.draw(bomba.sprite);
+
+				window.draw(stage.sprite);
 
 				window.draw(timeInfoHeader.sprite);
+
+				
+
+				loadDigit(mainMap.time, digits, window, stop);
 
 				health.sprite.setTextureRect(IntRect(3 - hero.healPoints, 0, 150, 50));
 				window.draw(health.sprite);
