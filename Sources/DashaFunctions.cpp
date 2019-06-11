@@ -6,14 +6,18 @@
 
 using namespace sf;
 
-void Bomba::placeBomb(float time, Player& hero)
+void Bomba::placeBomb(float time, Player& hero, StageMap& mainMap)
 {
 	if ((this->flagBomb == 0) && (Keyboard::isKeyPressed(Keyboard::Space)))
 	{
 		this->flagBomb = 1;
 		this->x = hero.x;
 		this->y = hero.y;
-		this->sprite.setPosition(x, y);
+		if (this->x - int(this->x / 50) * 50 > 25) this->x = int(this->x / 50) * 50 + 50;
+		else this->x = int(this->x / 50) * 50;
+		if (this->y - int(this->y / 50) * 50 > 25) this->y = int(this->y / 50) * 50 + 50;
+		else this->y = int(this->y / 50) * 50;
+		this->sprite.setPosition(this->x, this->y);
 	}
 	if (this->flagBomb == 1)//like update
 	{
@@ -23,8 +27,18 @@ void Bomba::placeBomb(float time, Player& hero)
 		{
 			this->CurrentFrameBomb = 0;
 			this->flagBomb = 0;
+			int indRow = this->y / 50 - 1, indBar = this->x / 50;
+			destroyBoxes(mainMap, indRow, indBar);
 		}
 	}
 	
+}
+
+void Bomba::destroyBoxes(StageMap& mainMap, int indRow, int indBar)
+{
+	if (mainMap.tileMap[indRow + 1][indBar] == 'b') mainMap.tileMap[indRow + 1][indBar] = ' ';
+	if (mainMap.tileMap[indRow - 1][indBar] == 'b') mainMap.tileMap[indRow - 1][indBar] = ' ';
+	if (mainMap.tileMap[indRow][indBar + 1] == 'b') mainMap.tileMap[indRow][indBar + 1] = ' ';
+	if (mainMap.tileMap[indRow][indBar - 1] == 'b') mainMap.tileMap[indRow][indBar - 1] = ' ';
 }
 

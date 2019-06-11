@@ -50,30 +50,30 @@ void Enemy::movement(float time, float& CurrentFrame, StageMap& mainMap, Clock& 
 	if (this->dir == 1)
 	{
 		this->speed = 0.07;
-		CurrentFrame += 0.006 * time;
-		if (CurrentFrame > 3) CurrentFrame -= 3;
-		this->sprite.setTextureRect(IntRect(50 * int(CurrentFrame), 150, 50, 50));
+		CurrentFrame += 0.004 * time;
+		if (CurrentFrame > 2) CurrentFrame -= 2;
+		this->sprite.setTextureRect(IntRect(50 * int(CurrentFrame), 100, 50, 50));
 	}
 	if (this->dir == 2)
 	{
 		this->speed = 0.07;
-		CurrentFrame += 0.006 * time;
-		if (CurrentFrame > 3) CurrentFrame -= 3;
-		this->sprite.setTextureRect(IntRect(50 * int(CurrentFrame), 100, 50, 50));
+		CurrentFrame += 0.004 * time;
+		if (CurrentFrame > 2) CurrentFrame -= 2;
+		this->sprite.setTextureRect(IntRect(50 * int(CurrentFrame), 150, 50, 50));
 	}
 	if (this->dir == 3)
 	{
 		this->speed = 0.07;
-		CurrentFrame += 0.006 * time;
-		if (CurrentFrame > 3) CurrentFrame -= 3;
-		this->sprite.setTextureRect(IntRect(50 * int(CurrentFrame), 50, 50, 50));
+		CurrentFrame += 0.004 * time;
+		if (CurrentFrame > 2) CurrentFrame -=2;
+		this->sprite.setTextureRect(IntRect(50 * int(CurrentFrame), 0, 50, 50));
 	}
 	if (this->dir == 4)
 	{
 		this->speed = 0.07;
-		CurrentFrame += 0.006 * time;
-		if (CurrentFrame > 3) CurrentFrame -= 3;
-		this->sprite.setTextureRect(IntRect(50 * int(CurrentFrame), 0, 50, 50));
+		CurrentFrame += 0.004 * time;
+		if (CurrentFrame > 2) CurrentFrame -= 2;
+		this->sprite.setTextureRect(IntRect(50 * int(CurrentFrame), 50, 50, 50));
 	}
 }
 

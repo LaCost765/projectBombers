@@ -152,17 +152,19 @@ String loadStageImage(int level)
 	return path;
 }
 
-void loadDigit(int & stageTime, Picture digits, RenderWindow & window, int & stopFlag)
+void loadDigit(int & stageTime, Picture digits, RenderWindow & window, int & stopFlag, Player hero)
 {
 	int d = 0;
 	int tempTime = stageTime;
-		
+	int delCameraX = 0;
+	if (hero.x > 600) delCameraX = hero.x - 600;
+
 	for (int i = 0; i < 3; ++i)
 	{
 		d = tempTime % 10;
 		tempTime /= 10;
 		digits.sprite.setTextureRect(IntRect(d * 50, 0, 50, 50));
-		digits.sprite.setPosition(675 - i * 50, 0);
+		digits.sprite.setPosition(675 - i * 50 + delCameraX, 0);
 		window.draw(digits.sprite);
 	}
 	if (stageTime > 0)

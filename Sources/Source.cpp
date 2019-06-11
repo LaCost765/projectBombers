@@ -112,8 +112,9 @@ int main()
 				time = time / 800;
 				if (time > 7)
 				{
-					time = 0;
+					time = 7;
 				}
+				std::cout << time << std::endl;
 				
 				// character with animation
 
@@ -122,11 +123,9 @@ int main()
 				hero.update(time, hero, mainMap);
 
 
-			//	enemySp.movement(time, enemySp.currentFrame, mainMap, clock);
 				moveEnemies(enemies, enemies_iterator, time, mainMap, clock);
-			//	enemySp.update(time, mainMap);
 				updateEnemies(enemies, enemies_iterator, time);
-				bomba.placeBomb(time, hero);
+				bomba.placeBomb(time, hero, mainMap);
 
 				window.setView(view);
 
@@ -146,7 +145,7 @@ int main()
 
 				
 
-				loadDigit(mainMap.time, digits, window, stop);
+				loadDigit(mainMap.time, digits, window, stop, hero);
 
 				health.sprite.setTextureRect(IntRect(3 - hero.healPoints, 0, 150, 50));
 				window.draw(health.sprite);

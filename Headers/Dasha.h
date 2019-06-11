@@ -29,7 +29,7 @@ public:
 class Player : public Parent
 {
 public:
-	int healPoints = 3, level = 5;
+	int healPoints = 3, level = 1;
 
 	Player(String F, float X, float Y, float W, float H) : Parent(F, X, Y, W, H)
 	{  
@@ -59,5 +59,6 @@ public:
 		sprite.setTextureRect(IntRect(0, 0, w, h));
 	}
 
-	void placeBomb(float time, Player& hero);
+	void placeBomb(float time, Player& hero, StageMap& mainMap);
+	void destroyBoxes(StageMap& mainMap, int indRow, int indBar);
 };

@@ -39,4 +39,4 @@ String loadStageImage(int level);
 Picture digits("Data/digits.png", 0, 0, 500, 50, 850, 0);
 Picture stage(loadStageImage(hero.level),0,0,300,50,50,0);
 
-void loadDigit(int & stageTime, Picture digits, RenderWindow& window, int & stop);
+void loadDigit(int & stageTime, Picture digits, RenderWindow& window, int & stop, Player hero);
