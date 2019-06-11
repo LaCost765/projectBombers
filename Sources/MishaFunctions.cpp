@@ -77,7 +77,7 @@ void Enemy::movement(float time, float& CurrentFrame, StageMap& mainMap, Clock& 
 	}
 }
 
-void Enemy::update(float time, StageMap& mainMap) // function of "update" the class object.
+void Enemy::update(float time) // function of "update" the class object.
 {
 	switch (dir)
 	{
@@ -97,6 +97,12 @@ void Enemy::update(float time, StageMap& mainMap) // function of "update" the cl
 int Enemy::chooseDir(Clock& clock)
 {
 	int result = 0;
+	if (dirs[1]+dirs[2]+dirs[3]+dirs[4] == 0)
+	{
+		this->speed = 0;
+		return -1;
+	}
+	else { this->speed = 0.07;}
 	while (result == 0)
 	{
 		int k = rand() % 4 + 1;

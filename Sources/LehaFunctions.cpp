@@ -1,7 +1,12 @@
 #include <SFML/Graphics.hpp>
+#include <list>
 #include <iostream>
-#include "Leha.h"
+#include <string>
+#include <ctime>
 #include "Dasha.h"
+#include "Misha.h"
+#include "Leha.h"
+#include "Egor.h"
 
 using namespace sf;
 
@@ -79,6 +84,105 @@ void StageMap::box_Generator(int lvl)
 			tileMap[yBoxCord][xBoxCord] = 'b';
 		}
 	}
+}
+
+void generateEnemies(int level, std::list<Enemy*> & enemies, StageMap map)
+{
+	bool checkExtra = false;
+
+	for (int i = 1; i <= MAP_HEIGHT-2; ++i) //four zones
+	{
+		int x = 4 + rand() % (MAP_WIDTH - 6);
+		int y = i;
+		while (map.tileMap[y][x] != ' ')
+		{
+			x = 4 + rand() % (MAP_WIDTH - 6);
+
+		}
+		enemies.push_back(new Enemy("Data/enemy.png", x*50, y*50+SHIFT, 50.0, 50.0));		
+		
+	}
+
+	if (level > 1) //extra enemies 
+	{
+		for (int j = 1; j <= level * 5; ++j)
+		{
+			int x = 4 + rand() % (MAP_WIDTH - 6);
+			int y = 1 + rand() % 13;
+			while (map.tileMap[y][x] != ' ')
+			{
+				x = 4 + rand() % (MAP_WIDTH - 6);
+				y = 1 + rand() % 13;
+			}
+			enemies.push_back(new Enemy("Data/enemy.png", x * 50, y * 50 + SHIFT, 50.0, 50.0));
+		}
+	}
+	std::cout << enemies.size() << std::endl;
+}
+
+void updateEnemies(std::list<Enemy*> enemies,
+	std::list<Enemy*>::iterator iterator, float time)
+{
+	for (iterator = enemies.begin();iterator != enemies.end(); iterator++)
+	{
+		(*iterator)->update(time);
+	}
+}
+
+void moveEnemies(std::list<Enemy*> enemies,
+	std::list<Enemy*>::iterator iterator, float time, StageMap& mainMap, Clock& clock)
+{
+	for (iterator = enemies.begin(); iterator != enemies.end(); iterator++)
+	{
+		(*iterator)->movement(time,(*iterator)->currentFrame,mainMap,clock);
+	}
+}
+
+void drawEnemies(std::list<Enemy*> enemies,
+	std::list<Enemy*>::iterator iterator, RenderWindow & window)
+{
+	for (iterator = enemies.begin(); iterator != enemies.end(); iterator++)
+	{
+		window.draw((*iterator)->sprite);
+	}
+}
+String loadStageImage(int level)
+{
+	String path = "Data/Stages/stage" + std::to_string(level) + ".png";
+	return path;
+}
+
+void loadDigit(int & stageTime, Picture digits, RenderWindow & window, int & stopFlag)
+{
+	int d = 0;
+	int tempTime = stageTime;
+		
+	for (int i = 0; i < 3; ++i)
+	{
+		d = tempTime % 10;
+		tempTime /= 10;
+		digits.sprite.setTextureRect(IntRect(d * 50, 0, 50, 50));
+		digits.sprite.setPosition(675 - i * 50, 0);
+		window.draw(digits.sprite);
+	}
+	if (stageTime > 0)
+	{
+		if (stopFlag == 0)
+		{
+			--stageTime;
+			++stopFlag;
+		}
+		else
+		{
+			if (stopFlag < 350)
+			{
+				++stopFlag;
+			}
+			else { stopFlag = 0; }
+
+		}
+	}
+					
 }
 
 
