@@ -124,6 +124,7 @@ int main()
 
 				moveEnemies(enemies, enemies_iterator, time, mainMap, clock);
 				updateEnemies(enemies, enemies_iterator, time);
+
 				bomba.placeBomb(time, hero, mainMap);
 
 				window.setView(view);
@@ -133,6 +134,8 @@ int main()
 				mainMap.draw_Map(window);
 
 				window.draw(hero.sprite);
+
+				if(bomba.y !=0) window.draw(bomba.sprite);
 
 				drawEnemies(enemies, enemies_iterator, window);
 

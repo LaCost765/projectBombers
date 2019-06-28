@@ -1,8 +1,9 @@
-//ρώδΰ οθψεμ ξοπεδελενθÿ τσνκφθι 
+//Γ±ΓΎΓ¤Γ  Γ―Γ¨ΓΈΓ¥Γ¬ Γ®Γ―Γ°Γ¥Γ¤Γ¥Γ«Γ¥Γ­Γ¨ΓΏ Γ΄Γ³Γ­ΓªΓ¶Γ¨Γ© 
 #include <SFML/Graphics.hpp>
 #include <iostream>
 #include "Dasha.h"
 #include "Leha.h"
+
 
 using namespace sf;
 
@@ -41,4 +42,3 @@ void Bomba::destroyBoxes(StageMap& mainMap, int indRow, int indBar)
 	if (mainMap.tileMap[indRow][indBar + 1] == 'b') mainMap.tileMap[indRow][indBar + 1] = ' ';
 	if (mainMap.tileMap[indRow][indBar - 1] == 'b') mainMap.tileMap[indRow][indBar - 1] = ' ';
 }
-
