@@ -10,6 +10,8 @@
 
 using namespace sf;
 
+int koef[MAP_HEIGHT][MAP_WIDTH];
+
 void StageMap::draw_Map(RenderWindow& window)
 {
 	for (int i = 0; i < MAP_HEIGHT; i++) {
@@ -19,7 +21,7 @@ void StageMap::draw_Map(RenderWindow& window)
 			{
 			case 'w': {mapSprite.setTextureRect(IntRect(0, 0, 50, 50)); break; };
 			case 'b': {mapSprite.setTextureRect(IntRect(50, 0, 50, 50)); break; };
-			case ' ': {mapSprite.setTextureRect(IntRect(100, 0, 50, 50)); break; };
+			case ' ': {mapSprite.setTextureRect(IntRect(100 + 50 * koef[i][j], 0, 50, 50)); break; };
 			default: break;
 			}
 
@@ -74,6 +76,12 @@ void StageMap::camera_Follow(float x, float y, View & view, Sprite& stage, Sprit
 
 void StageMap::box_Generator(int lvl)
 {
+	for (int i = 0; i < MAP_HEIGHT; i++) 
+		for (int j = 0; j < MAP_WIDTH; j++)
+		{
+			koef[i][j] = rand() % 5;
+		}
+	
 	int numberOfBoxes = 180 + (lvl * 15);
 	for (int i = 0; i < numberOfBoxes; ++i)
 	{
@@ -117,7 +125,6 @@ void generateEnemies(int level, std::list<Enemy*> & enemies, StageMap map)
 			enemies.push_back(new Enemy("Data/enemy.png", x * 50, y * 50 + SHIFT, 50.0, 50.0));
 		}
 	}
-	std::cout << enemies.size() << std::endl;
 }
 
 void updateEnemies(std::list<Enemy*> enemies,
@@ -157,8 +164,9 @@ void loadDigit(int & stageTime, Picture digits, RenderWindow & window, int & sto
 	int d = 0;
 	int tempTime = stageTime;
 	int delCameraX = 0;
-	if (hero.x > 600) delCameraX = hero.x - 600;
-
+	if (hero.x < 600) delCameraX = 0;
+	 else if (hero.x > 2050) delCameraX = 1450;
+	 else delCameraX = hero.x - 600;
 	for (int i = 0; i < 3; ++i)
 	{
 		d = tempTime % 10;

@@ -114,7 +114,6 @@ int main()
 				{
 					time = 7;
 				}
-				std::cout << time << std::endl;
 				
 				// character with animation
 

@@ -30,11 +30,11 @@ int stop = 0;
 
 void generateEnemies(int level, std::list<Enemy*> & enemies, StageMap map);
 void updateEnemies(std::list<Enemy*> enemies,
-	std::list<Enemy*>::iterator iterator, float time);
+std::list<Enemy*>::iterator iterator, float time);
 void moveEnemies(std::list<Enemy*> enemies,
-	std::list<Enemy*>::iterator iterator, float time, StageMap& mainMap, Clock& clock);
+std::list<Enemy*>::iterator iterator, float time, StageMap& mainMap, Clock& clock);
 void drawEnemies(std::list<Enemy*> enemies,
-	std::list<Enemy*>::iterator iterator, RenderWindow& window);
+std::list<Enemy*>::iterator iterator, RenderWindow& window);
 String loadStageImage(int level);
 Picture digits("Data/digits.png", 0, 0, 500, 50, 850, 0);
 Picture stage(loadStageImage(hero.level),0,0,300,50,50,0);
